@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    container_name: nginx
+    working_dir: /app
+    ports:
+      - 80:80
+    depends_on:
+      - mysql
+      - php
+
+  php:
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    container_name: php
+    working_dir: /app
+    ports:
+      - 9000:80
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_DATABASE=test-justin
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - 8989:3306
+
+  pma:
+    image: phpmyadmin
+    container_name: pma
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    depends_on:
+      - mysql

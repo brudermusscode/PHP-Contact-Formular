@@ -3,9 +3,7 @@ version: "3"
 services:
 
   nginx:
-    build:
-      context: .
-      dockerfile: nginx/Dockerfile
+    image: gitlab-registry.deltacity.net/tfauseweh/test-justin/nginx:latest
     container_name: nginx
     working_dir: /app
     ports:
@@ -15,13 +13,11 @@ services:
       - php
 
   php:
-    build:
-      context: .
-      dockerfile: php/Dockerfile
+    image: gitlab-registry.deltacity.net/tfauseweh/test-justin/php:latest
     container_name: php
     working_dir: /app
     ports:
-      - 9000:80
+      - 9000:9000
     depends_on:
       - mysql
 

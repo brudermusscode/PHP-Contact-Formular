@@ -1,1 +1,1 @@
-first docker attempts, contact form with image attachments
+Contact formular in PHP runnable as Docker conatainer
